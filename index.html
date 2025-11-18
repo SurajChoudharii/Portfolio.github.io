@@ -1,0 +1,612 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Suraj Choudhari | Portfolio</title>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        :root {
+            --primary: #00ffea;
+            /* amber */
+            --secondary: #fff;
+            /* white */
+            --bg: #0a0a0a;
+            /* matte black */
+            --text: #fff;
+        }
+
+        /* Reset & Body */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Roboto', sans-serif;
+            background: var(--bg);
+            color: var(--text);
+        }
+
+
+        /* Layout */
+        .container {
+            display: flex;
+            /* push down to avoid navbar overlap */
+        }
+
+        /* Profile Container Left */
+        .profile-container {
+            position: fixed;
+            /* below navbar */
+            left: 0;
+            width: 33.33%;
+            height: 100vh;
+            background-color: #0a0a0a;
+            color: #fff;
+            padding: 40px 30px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            text-align: center;
+            overflow-y: auto;
+        }
+
+        /* Content Right */
+        .content-container {
+            margin-left: 30%;
+            width: 66.66%;
+            padding: 40px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        /* Profile Card */
+        .profile {
+            background: #1a1a1a;
+            color: var(--primary);
+            border-radius: 20px;
+            padding: 30px 20px;
+            width: 100%;
+            text-align: center;
+        }
+
+        .profile img {
+            width: 180px;
+            height: 180px;
+            border-radius: 15%;
+            border: 4px solid var(--primary);
+            margin-top: 40px;
+            margin-bottom: 50px;
+        }
+
+        .profile h2 {
+            font-size: 2.5rem;
+            margin-bottom: 5px;
+            font-weight: 700;
+        }
+
+        .profile p {
+            opacity: 0.9;
+            margin-bottom: 15px;
+            color: var(--secondary);
+            font-size: 0.95rem;
+        }
+
+        .profile .info p {
+            text-align: left;
+            margin-bottom: 12px;
+            font-size: 1rem;
+            color: var(--secondary);
+        }
+
+        .profile .info i {
+            font-size: 1.1rem;
+            margin-right: 10px;
+            color: var(--primary);
+
+        }
+
+        .social-media {
+            margin-top: auto;
+            display: flex;
+            justify-content: center;
+            gap: 20px;
+        }
+
+        .social-media a i {
+            transition: transform 0.3s ease;
+        }
+
+        .social-media a:hover i {
+            transform: translateY(-5px) scale(1.1);
+        }
+
+        /* Tabs */
+        .tabs-container {
+            display: flex;
+            border-radius: 12px;
+            overflow: hidden;
+            width: 100%;
+            max-width: 900px;
+            margin-bottom: 30px;
+            background: #111;
+        }
+
+        .tabs-container button {
+            flex: 1;
+            padding: 15px 0;
+            border: none;
+            background: #111;
+            color: var(--secondary);
+            font-weight: 600;
+            cursor: pointer;
+            font-size: 1rem;
+            transition: all 0.3s ease;
+            position: relative;
+        }
+
+        .tabs-container button.active::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 20px;
+            right: 20px;
+            height: 3px;
+            background: var(--primary);
+            border-radius: 2px;
+        }
+
+        .tab-content {
+            width: 100%;
+            max-width: 900px;
+        }
+
+        .tab-content section {
+            display: none;
+        }
+
+        .tab-content section.active {
+            display: block;
+        }
+
+        section h2 {
+            font-size: 2rem;
+            margin-bottom: 20px;
+            color: var(--primary);
+            position: relative;
+        }
+
+        section h2::after {
+            content: '';
+            width: 150px;
+            height: 4px;
+            background: var(--primary);
+            display: block;
+            margin-top: 8px;
+            border-radius: 2px;
+        }
+
+        /* Skills */
+        .skills {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 20px;
+        }
+
+        .skill {
+            background: #111;
+            color: var(--secondary);
+            padding: 25px;
+            border-radius: 15px;
+            text-align: center;
+            font-weight: 500;
+            border: 2px solid var(--primary);
+        }
+
+        /* Projects */
+        .project-card {
+            background: #111;
+            color: var(--secondary);
+            padding: 20px;
+            border-radius: 12px;
+            border: 2px solid var(--primary);
+            margin-bottom: 20px;
+        }
+
+        .project-card h3 {
+            font-size: 1.4rem;
+            color: var(--primary);
+            margin-bottom: 10px;
+        }
+
+        .project-tech {
+            display: flex;
+            flex-wrap: wrap;
+            margin-top: 20px;
+            gap: 8px;
+        }
+
+        .project-tech .tag {
+            background: #222;
+            color: var(--secondary);
+            border: 1px solid var(--primary);
+            padding: 4px 10px;
+            margin: 5px;
+            padding: 12px;
+            border-radius: 15px;
+            font-size: 0.85em;
+        }
+
+        /* Resume */
+        .resume-section,
+        .education-item,
+        .cert-item {
+            background: #111;
+            border-radius: 15px;
+            margin-bottom: 15px;
+            padding: 15px 20px;
+        }
+
+        .education-item .row {
+            display: flex;
+            justify-content: space-between;
+        }
+
+        .college-name,
+        .year {
+            font-weight: 600;
+            color: var(--primary);
+        }
+
+        .course,
+        .score {
+            color: var(--secondary);
+        }
+
+        .cert-item {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .cert-provider {
+            color: white;
+            font-weight: 600;
+        }
+
+        .resume-box {
+            background: #1a1a1a;
+            padding: 20px;
+            border-radius: 10px;
+            margin-top: 15px;
+        }
+
+        .extra-item {
+            color: var(--secondary);
+            padding: 15px 0;
+            border-bottom: 1px solid #333;
+        }
+
+        .extra-item:last-child {
+            border-bottom: none;
+        }
+
+        .training-box {
+            border-left: 4px solid var(--primary);
+            padding-left: 15px;
+            margin-bottom: 30px;
+            /* Add the following lines to match the project card style */
+            padding: 20px;
+            border-radius: 12px;
+            border: 2px solid var(--primary);
+        }
+
+        .training-name {
+            font-size: 1.4rem;
+            font-weight: bold;
+            color: var(--primary);
+            margin-bottom: 15px;
+        }
+
+        .training-role {
+            margin-bottom: 15px;
+            margin-top: 5px;
+            color: #fff;
+            /* Add bottom margin to the role text */
+        }
+
+        .training-course {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+            margin-top: 20px;
+            /* Add top margin to separate it from the role text */
+        }
+
+        .tag {
+            background: #222;
+            color: var(--secondary);
+            border: 1px solid var(--primary);
+            padding: 4px 4px;
+            margin: 5px;
+            padding: 12px;
+            border-radius: 15px;
+            font-size: 0.85em;
+        }
+
+        footer {
+            margin-top: 40px;
+            color: var(--secondary);
+            font-size: 0.85rem;
+        }
+
+        @media (max-width: 768px) {
+            .container {
+                flex-direction: column;
+                /* push below navbar */
+            }
+
+            .profile-container {
+                position: relative;
+                width: 100%;
+                height: auto;
+                top: 0;
+                margin-bottom: 20px;
+            }
+
+            .content-container {
+                margin-left: 0;
+                width: 100%;
+                padding: 20px;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+
+    <div class="container">
+        <!-- Profile -->
+        <div class="profile-container">
+            <div class="profile">
+                <img src="suraj.jpg" alt="Suraj Choudhari">
+                <h2>Suraj Choudhari</h2>
+                <p style="margin-bottom: 50px;">Data Science & AI Fresher | Python • SQL • Machine Learning</p>
+                <div class="info">
+                    <p><i class="fas fa-map-marker-alt" style="padding-left: 3px;"></i>Mumbai, Maharashtra, India</p>
+                    <p><i class="fas fa-envelope"></i> <a href="mailto:choudharisuraj157@gmail.com"
+                            style="color: inherit; text-decoration: none;">choudharisuraj157@gmail.com</a></p>
+                    <p><i class="fas fa-phone"></i> <a href="tel:+91 90759 45110"
+                            style="color: inherit; text-decoration: none;">+91 90759 45110</a></p>
+                </div>
+                <h3 style="margin:25px 0;margin-top: 50px; color:var(--primary);">Reach/Connect Me At</h3>
+                <div class="social-media">
+                    <a href="https://www.linkedin.com/in/surajchoudharii" target="_blank" title="LinkedIn">
+                        <i class="fab fa-linkedin fa-2x" style="color: var(--primary);"></i>
+                    </a>
+                    
+                    <a href="https://github.com/SurajChoudharii" target="_blank" title="GitHub">
+                        <i class="fab fa-github fa-2x" style="color:white"></i>
+                    </a>
+                </div>
+            </div>
+        </div>
+
+        <!-- Content -->
+        <div class="content-container">
+            <div class="tabs-container">
+                <button class="tab-button active" data-tab="home">Home</button>
+                <button class="tab-button" data-tab="resume">Resume</button>
+            </div>
+
+            <div class="tab-content">
+                <section id="home" class="active">
+                    <h2>Skills</h2>
+                            <div class="skills">
+                            <div class="skill">Python</div>
+                            <div class="skill">Pandas</div>
+                            <div class="skill">NumPy</div>
+                            <div class="skill">Scikit-learn</div>
+                            <div class="skill">TensorFlow / Keras</div>
+                            <div class="skill">Time Series</div>
+                            <div class="skill">NLP</div>
+                            <div class="skill">Data Visualization</div>
+                            <div class="skill">Jupyter / Colab</div>
+                            <div class="skill">SQL / Excel</div>
+            </div>
+
+                    <h2 style="margin-top: 40px;">Projects</h2>
+                    <div class="project-card">
+                        <h3>Diamond Price Prediction</h3>
+                        <a href="https://github.com/SurajChoudharii/Diamond_Price_Prediction" 
+                            style="color: var(--primary); text-decoration: underline;">Link to Repo</a>
+                        <p>Regression model to predict diamond prices — data cleaning, feature engineering, model selection and evaluation. (Jupyter Notebook)</p>
+                        <div class="project-tech">
+                            <span class="tag">Python</span>
+                            <span class="tag">Regression</span>
+                            <span class="tag">Pandas</span>
+                            <span class="tag">Scikit-learn</span>
+                            
+                        </div>
+                    </div>
+
+                    
+                    <div class="project-card">
+                        <h3>Netflix Subscription Forecasting</h3>
+                        <a href="https://github.com/SurajChoudharii/netflix_subscription_forcasting" 
+                            style="color: var(--primary); text-decoration: underline;">Link to Repo</a>
+                        
+                        <p>Time-series analysis & forecasting for Netflix subscription growth using statistical models and evaluation of forecasting accuracy. (Jupyter Notebook)</p>
+                        <div class="project-tech">
+                            <span class="tag">Python</span>
+                            <span class="tag">Statsmodels</span>
+                            <span class="tag">Time Series</span>
+
+                        </div>
+                    </div>
+
+                    <div class="project-card">
+                        <h3>End-to-End Chatbot</h3>
+                        <a href="https://github.com/SurajChoudharii/End_to_End_Chatbot" 
+                            style="color: var(--primary); text-decoration: underline;">Link to Repo</a>
+                        <p>Intent-based chatbot built with NLP techniques and neural networks (TensorFlow). Includes preprocessing, model training and conversational flow testing. (Jupyter Notebook)</p>
+                        <div class="project-tech">
+                            <span class="tag">TensorFlow</span>
+                            <span class="tag">NLP</span>
+                        </div>
+                    </div>
+
+                    <div class="project-card">
+                        <h3>Data Wrangling Notebooks</h3>
+                        <a href="https://github.com/SurajChoudharii/Data-Wrangling"
+                            style="color: var(--primary); text-decoration: underline;">Link to Repo</a>
+                        <p>Collection of notebooks showing practical data cleaning, EDA and feature preparation examples used across projects.</p>
+                        <div class="project-tech">
+                            <span class="tag">EDA</span>
+                            <span class="tag">Data Cleaning</span>
+                        </div>
+                    </div>
+
+                    <div class="project-card">
+                        <h3>K-Means Clustering — ML Project</h3>
+                        <a href="https://github.com/SurajChoudharii/ML-Project-K-Means-Clustering"
+                            style="color: var(--primary); text-decoration: underline;">Link to Repo</a>
+                        <p>Hands-on clustering project to demonstrate unsupervised learning and cluster evaluation.</p>
+                        <div class="project-tech">
+                            <span class="tag">Clustering</span>
+                            <span class="tag">Scikit-learn</span>
+                        </div>
+                    </div>
+
+                    <h2 style="margin-top: 40px;">Professional Training</h2>
+                    <div class="resume-box training-box">
+                        <div class="training-item">
+                            <span class="training-name">Top Mentor Institute</span>
+                            <p class="training-role">Artificial Intelligence, Data Analytics & Data Science</p>
+                            <div class="training-course">
+                                <span class="tag">Advanced Excel</span>
+                                <span class="tag">Power BI</span>
+                                <span class="tag">Tableau</span>
+                                <span class="tag">Statistics</span>
+                                <span class="tag">Python</span>
+                                <span class="tag">Machine Learning</span>
+                                <span class="tag">Deep Learning</span>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+
+                <section id="resume">
+                    <h2>Education</h2>
+                    <div class="resume-section">
+                        <div class="education-item">
+                            <div class="row">
+                                <p class="college-name">K.V.Pendharkar College of Arts, Science and Commerce</p>
+                                <p class="year">2025</p>
+                            </div>
+                            <div class="row">
+                                <p class="course">Bachelor of Commerce</p>
+                                <p class="score">CGPA: 7.65</p>
+                            </div>
+                        </div>
+
+                        <div class="education-item">
+                            <div class="row">
+                                <p class="college-name">RAMCHAND KIMATRAM TALREJA COLLEGE OF ARTS, SCIENCE & COMMERCE</p>
+                                <p class="year">2022</p>
+                            </div>
+                            <div class="row">
+                                <p class="course">Higher Secondary Certificate</p>
+                                <p class="score">Percentage: 66%</p>
+                            </div>
+                        </div>
+
+                        <div class="education-item">
+                            <div class="row">
+                                <p class="college-name">Chhatrapati Rajarshi Shahu Maharaj Secondary High School</p>
+                                <p class="year">2020</p>
+                            </div>
+                            <div class="row">
+                                <p class="course">Secondary School Certificate</p>
+                                <p class="score">Percentage: 85.60%</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <h2>Certifications</h2>
+                    <div class="resume-section">
+                        <div class="cert-item">
+                            <p class="cert-name">Master’s in Artificial Intelligence</p>
+                            <p class="cert-provider">Top Mentor Institute</p>
+                        </div>
+                        <div class="cert-item">
+                            <p class="cert-name">Python with Data Analysis & Data Science</p>
+                            <p class="cert-provider">Top Mentor Institute</p>
+                        </div>
+                    </div>
+                    <h2 style="margin-top:20px">Resume</h2>
+                    <div class="resume-card" style="margin-top:10px; text-align:center">
+                        <p style="color:var(--muted); margin-bottom:12px">Click below to View or Download My Resume:</p>
+                        <a href="Suraj Choudhari.pdf" 
+                           target="_blank" 
+                           style="
+                                display:inline-block;
+                                background:var(--primary);
+                                color:#000;
+                                padding:12px 18px;
+                                border-radius:10px;
+                                font-weight:600;
+                                text-decoration:none;
+                             box-shadow:0 0 10px rgba(255,191,0,0.4);
+                           ">
+                          📄 View / Download Resume (PDF)
+                        </a>
+                    </div>
+
+                    <h2 style="margin-top: 40px;">Hobbies</h2>
+                    <div class="skills">
+                        <div class="skill">Trading</div>
+                        <div class="skill">Gaming</div>
+                        <div class="skill">Music</div>
+                    </div>
+                </section>
+            </div>
+
+            <footer>
+                &copy; 2025 Suraj Choudhari
+            </footer>
+        </div>
+    </div>
+
+    <script>
+        const tabButtons = document.querySelectorAll('.tab-button');
+        const tabSections = document.querySelectorAll('.tab-content section');
+
+        tabButtons.forEach(btn => {
+            btn.addEventListener('click', () => {
+                tabButtons.forEach(b => b.classList.remove('active'));
+                btn.classList.add('active');
+
+                const target = btn.dataset.tab;
+                tabSections.forEach(sec => sec.classList.remove('active'));
+                document.getElementById(target).classList.add('active');
+            });
+        });
+    </script>
+</body>
+
+</html>
+
+
+
+
+
+
+
+
